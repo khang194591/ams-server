@@ -1,0 +1,68 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "extendedWhereUnique"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int     @id @default(autoincrement())
+  email         String  @unique
+  password      String?
+  firstName     String
+  lastName      String
+  phone         String? @unique
+  gender        Gender?
+  birthDay      String?
+  citizenId     String? @unique
+  bank          String?
+  bankAccount   String?
+  province      String?
+  district      String?
+  ward          String?
+  address       String?
+  status        Status  @default(pending)
+  administrator Boolean @default(false)
+
+  roleId   Int?
+  avatarId Int?
+
+  role   Role? @relation(fields: [roleId], references: [id])
+  avatar File? @relation(fields: [avatarId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Role {
+  id    Int    @id @default(autoincrement())
+  title String @unique
+
+  users       User[]
+  permissions String[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model File {
+  id       Int    @id @default(autoincrement())
+  mimetype String
+  buffer   String
+  users    User[]
+}
+
+enum Gender {
+  male
+  female
+  other
+}
+
+enum Status {
+  active
+  inactive
+  pending
+}

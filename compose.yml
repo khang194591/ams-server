@@ -1,0 +1,39 @@
+version: '3'
+services:
+  ams-api:
+    environment:
+      - DATABASE_URL=name=postgresql://postgres:1@localhost:5432/postgres?schema=base
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ams-api
+    container_name: ams-api
+    restart: always
+    networks:
+      - api-network
+    links:
+      - db:db
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    command: npm start
+  db:
+    image: postgres
+    container_name: ams-db
+    restart: always
+    networks:
+      - api-network
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1
+    expose:
+      - 5432
+    
+networks:
+  api-network:
+    driver: bridge

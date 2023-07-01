@@ -1,0 +1,1 @@
+{"version":3,"file":"role.schema.js","sourceRoot":"","sources":["../../../../src/app/role/role.schema.ts"],"names":[],"mappings":";;;AAAA,6BAA4C;AAE/B,QAAA,UAAU,GAAG,IAAA,YAAM,EAAC;IAC/B,KAAK,EAAE,IAAA,YAAM,GAAE,CAAC,QAAQ,EAAE,CAAC,OAAO,EAAE;IACpC,WAAW,EAAE,IAAA,WAAK,GAAE,CAAC,EAAE,CAAC,IAAA,YAAM,GAAE,CAAC,CAAC,QAAQ,EAAE,CAAC,OAAO,EAAE;CACvD,CAAC,CAAC"}
